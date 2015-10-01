@@ -1,0 +1,1 @@
+videojs.options.flash.swf = "/video/1.MP4"

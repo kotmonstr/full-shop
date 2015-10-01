@@ -1,0 +1,4 @@
+// Настроить перевод
+yii message/config frontend/messages/app.php
+// Сделать перевод
+yii message/extract frontend/messages/app.php

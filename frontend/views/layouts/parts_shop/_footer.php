@@ -14,7 +14,7 @@ Yii::$app->formatter->locale = 'ru-RU';
                     </div>
                 </div>
                 <div class="col-sm-7">
-
+<?php if($modelYoutube): ?>
                     <?php foreach($modelYoutube as $video): ?>
 
                     <div class="col-sm-3">
@@ -33,6 +33,7 @@ Yii::$app->formatter->locale = 'ru-RU';
                     </div>
 
                     <?php endforeach; ?>
+                    <?php endif; ?>
 
                 </div>
                 <div class="col-sm-3">

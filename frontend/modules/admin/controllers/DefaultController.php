@@ -35,8 +35,9 @@ class DefaultController extends Controller {
         if(Yii::$app->user->identity->role == 10){
               $this->layout='/adminka-admin';
         }else{
-            vd(Yii::$app->user->identity->role);
-            $this->layout='/adminka-user';
+            $this->layout='/adminka-admin';
+            //vd(Yii::$app->user->identity->role);
+            //$this->layout='/adminka-user';
         }
 
         return $this->render('index');

@@ -187,5 +187,10 @@ switch ($data['currCurency']) {
     .girl{
         max-height: 300px;
     }
+    #slider-carousel{
+        max-height: 355px!important;
+        min-height: 354px!important;
+        height: 354px!important;
+    }
 </style>
 

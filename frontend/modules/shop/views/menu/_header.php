@@ -53,17 +53,17 @@ $Path=$ModuleShop->GetPath();
                 <ul id="menu-top" class="nav nav-tabs shop-menu ">
 <!--                    <li role="presentation" class="--><?php //if($Path =='shop/default/index'){ echo'active';} ?><!--"><a href="--><?//= Url::to('/shop/index'); ?><!--"><i class="fa fa-home"> Главная</i></a></li>-->
 <!--                    <li role="presentation" class="--><?php //if($Path =='shop/default/3'){ echo'active';} ?><!--"><a href="#"><i class="fa fa-user"> Accaunt</i></a></li>-->
-                    <li role="presentation" class="<?php if($Path =='shop/default/wishlist'){ echo'active';} ?>"><a href="<?= Url::to('/shop/wishlist'); ?>"><i class="fa fa-star"><?= Yii::t('app','Список желаний'); ?> <span id="wishlist"> <?= $data['quantityWishlist'] ?></span></i></a></li>
-                    <li role="presentation" class="<?php if($Path =='shop/default/comparelist'){ echo'active';} ?>"><a href="<?= Url::to('/shop/comparelist'); ?>"><i class="fa fa-list"><?= Yii::t('app','Список сравнения'); ?> <span id="comparelist"><?= $data['quantityCompareList'] ?></span></i></a></li>
-                    <li role="presentation" class="<?php if($Path =='shop/default/order'){ echo'active';} ?>"><a href="<?= Url::to('/shop/order'); ?>"><i class="fa fa-crosshairs"><?= Yii::t('app','Мой заказ'); ?></i></a></li>
+                    <li role="presentation" class="<?php if($Path =='shop/default/wishlist'){ echo'active';} ?>"><a href="<?= Url::to('/shop/wishlist'); ?>"><i class="fa fa-star"><?= Yii::t('app',' Список желаний'); ?> <span id="wishlist"> <?= $data['quantityWishlist'] ?></span></i></a></li>
+                    <li role="presentation" class="<?php if($Path =='shop/default/comparelist'){ echo'active';} ?>"><a href="<?= Url::to('/shop/comparelist'); ?>"><i class="fa fa-list"><?= Yii::t('app',' Список сравнения'); ?> <span id="comparelist"><?= $data['quantityCompareList'] ?></span></i></a></li>
+                    <li role="presentation" class="<?php if($Path =='shop/default/order'){ echo'active';} ?>"><a href="<?= Url::to('/shop/order'); ?>"><i class="fa fa-crosshairs"><?= Yii::t('app',' Мой заказ'); ?></i></a></li>
 <!--                    <li role="presentation" class="--><?php //if($Path =='shop/default/cart'){ echo'active';} ?><!--"><a href="--><?//= Url::to('/shop/cart') ?><!--" class="--><?php //if ($quantityInCart > 0) {echo 'big-font';} ?><!--"><i class="fa fa-shopping-cart "> Корзина</i></a></li>-->
                     <?php if(Yii::$app->user->isGuest): ?>
-                        <li role="presentation" class="<?php if($Path =='shop/default/signup'){ echo'active';} ?>"><a href="<?= Url::to('/shop/signup') ?>"><i class="fa fa-lock"><?= Yii::t('app','Регистрация'); ?></i></a></li>
-                        <li role="presentation" class="<?php if($Path =='shop/default/login'){ echo'active';} ?>"><a href="<?= Url::to('/shop/login') ?>"><i class="fa fa-lock"><?= Yii::t('app','Вход'); ?></i></a></li>
+                        <li role="presentation" class="<?php if($Path =='shop/default/signup'){ echo'active';} ?>"><a href="<?= Url::to('/shop/signup') ?>"><i class="fa fa-lock"><?= Yii::t('app',' Регистрация'); ?></i></a></li>
+                        <li role="presentation" class="<?php if($Path =='shop/default/login'){ echo'active';} ?>"><a href="<?= Url::to('/shop/login') ?>"><i class="fa fa-lock"><?= Yii::t('app',' Вход'); ?></i></a></li>
                     <?php else: ?>
-                        <li role="presentation" class="<?php if($Path =='shop/default/logout'){ echo'active';} ?>"><a href="<?= Url::to('/site/logout-shop') ?>"><i class="fa fa-lock"><?= Yii::t('app','Выход'); ?></i></a></li>
+                        <li role="presentation" class="<?php if($Path =='shop/default/logout'){ echo'active';} ?>"><a href="<?= Url::to('/site/logout-shop') ?>"><i class="fa fa-lock"><?= Yii::t('app',' Выход'); ?></i></a></li>
                     <?php endif ?>
-                    <li role="presentation" class="<?php if($Path =='shop/default/2'){ echo'active';} ?>"><a href="<?= Url::to('/admin/index'); ?>"><i class="fa fa-lock"><?= Yii::t('app','Админка'); ?></i></a></li>
+                    <li role="presentation" class="<?php if($Path =='shop/default/2'){ echo'active';} ?>"><a href="<?= Url::to('/admin/index'); ?>"><i class="fa fa-lock"><?= Yii::t('app',' Админка'); ?></i></a></li>
                 </ul>
             </div>
                 <div class="col-sm-2">

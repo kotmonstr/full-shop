@@ -1,10 +1,16 @@
 <?php
 
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 
 $conn = new mysqli($servername, $username, $password);
+$conn->query("SET NAMES 'utf8'");
+$conn->query("SET CHARACTER SET 'utf8'");
+$conn->query("SET SESSION collation_connection = 'utf8_general_ci'");
+
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -35,10 +41,10 @@ $sql = "CREATE TABLE IF NOT EXISTS `goods` (
 `quantity` int(11) NOT NULL,
 `rating` int(11) NOT NULL,
 `descr` text NOT NULL,
-`status` tinyint(4) NOT NULL COMMENT '1-продается, 0- не продается',
+`status` tinyint(4) NOT NULL COMMENT '1-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, 0- пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 `image` varchar(100) NOT NULL,
 `brend_id` int(11) DEFAULT NULL,
-`best` tinyint(4) DEFAULT NULL COMMENT '0- обычный, 1-рекомендован',
+`best` tinyint(4) DEFAULT NULL COMMENT '0- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, 1-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 `created_by` int(11) NOT NULL,
 `user_id` int(11) NOT NULL,
 PRIMARY KEY (`id`),
@@ -47,7 +53,7 @@ KEY `brend_id` (`brend_id`),
 KEY `brend_id_2` (`brend_id`),
 KEY `user_id` (`created_by`),
 KEY `user_id_2` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='товары' AUTO_INCREMENT=52 ;";
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='пїЅпїЅпїЅпїЅпїЅпїЅ' AUTO_INCREMENT=52 ;";
 $conn->query($sql);
 if ($conn->error) {
     echo "Table goods created" . '<br />';
@@ -120,7 +126,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `goods_category` (
 `name` varchar(255) NOT NULL,
 `descr` text NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='категории товаров' AUTO_INCREMENT=9 ;";
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ' AUTO_INCREMENT=9 ;";
 $conn->query($sql);
 if ($conn->error) {
     echo "Table goods_category created" . '<br />';
@@ -145,7 +151,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `banner` (
 `name` varchar(255) NOT NULL,
 `created_at` int(11) DEFAULT NULL,
 `updated_at` int(11) DEFAULT NULL,
-`status` tinyint(4) NOT NULL COMMENT '0-активно, 1- не активно',
+`status` tinyint(4) NOT NULL COMMENT '0-пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, 1- пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 `link` varchar(255) DEFAULT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=144 ;";
@@ -166,7 +172,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `video` (
 PRIMARY KEY (`id`),
 KEY `categoria` (`categoria`),
 KEY `author_id` (`author_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='видео ролики' AUTO_INCREMENT=43 ;";
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ' AUTO_INCREMENT=43 ;";
 $conn->query($sql);
 if ($conn->error) {
     echo "Table video created" . '<br />';
@@ -197,7 +203,7 @@ if ($conn->error) {
 $sql = "CREATE TABLE IF NOT EXISTS `image` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 `name` varchar(100) NOT NULL,
-`status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-активно, 1- не активно',
+`status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, 1- пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=132 ;";
 $conn->query($sql);
@@ -224,7 +230,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `video_categoria` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `name` varchar(255) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COMMENT='Категории видео' AUTO_INCREMENT=10 ;";
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COMMENT='пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ' AUTO_INCREMENT=10 ;";
 $conn->query($sql);
 if ($conn->error) {
     echo "Table video_categoria created" . '<br />';
@@ -246,7 +252,7 @@ PRIMARY KEY (`id`),
 KEY `author` (`author`),
 KEY `author_2` (`author`),
 KEY `updater_id` (`updater_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='статьи' AUTO_INCREMENT=3 ;";
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='пїЅпїЅпїЅпїЅпїЅпїЅ' AUTO_INCREMENT=3 ;";
 $conn->query($sql);
 if ($conn->error) {
     echo "Table blog created" . '<br />';
@@ -278,7 +284,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `goods_photos` (
 `name` varchar(255) NOT NULL,
 PRIMARY KEY (`id`),
 KEY `good_id` (`good_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='фотографии товара' AUTO_INCREMENT=10 ;";
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ' AUTO_INCREMENT=10 ;";
 $conn->query($sql);
 if ($conn->error) {
     echo "Table goods_photos created" . '<br />';
@@ -303,7 +309,7 @@ if ($conn->error) {
 $sql = "CREATE TABLE IF NOT EXISTS `order` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `ip` varchar(255) NOT NULL,
-`status` tinyint(4) NOT NULL COMMENT '1-ждет оплаты, 2 доствляется, 3 - выполнен',
+`status` tinyint(4) NOT NULL COMMENT '1-пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, 2 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, 3 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 `created_at` int(11) NOT NULL,
 `country_id` int(11) NOT NULL,
 `city_id` int(11) NOT NULL,
@@ -345,10 +351,440 @@ if ($conn->error) {
     echo "Table setup allredy exist". '<br />';
 }
 
+$sql = "CREATE TABLE IF NOT EXISTS `geo_country` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`name_ru` varchar(100) DEFAULT NULL,
+`name_en` varchar(100) DEFAULT NULL,
+`code` varchar(2) DEFAULT NULL,
+PRIMARY KEY (`id`),
+KEY `code` (`code`),
+KEY `name_en` (`name_en`),
+KEY `name_ru` (`name_ru`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=248";
 
+
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table geo_country created". '<br />';
+}else{
+    echo "Table geo_country allredy exist". '<br />';
+}
+
+$sql = "INSERT INTO `geo_country` (`id`, `name_ru`, `name_en`, `code`) VALUES
+(1, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Australia', 'AU'),
+(2, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Malaysia', 'MY'),
+(3, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'Korea', 'KR'),
+(4, 'пїЅпїЅпїЅпїЅпїЅ', 'China', 'CN'),
+(5, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Japan', 'JP'),
+(6, 'пїЅпїЅпїЅпїЅпїЅ', 'India', 'IN'),
+(7, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Taiwan', 'TW'),
+(8, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Hong Kong', 'HK'),
+(9, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Thailand', 'TH'),
+(11, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Vietnam', 'VN'),
+(12, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'France', 'FR'),
+(13, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Italy', 'IT'),
+(14, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'United Arab Emirates', 'AE'),
+(15, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Sweden', 'SE'),
+(16, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Kazakhstan', 'KZ'),
+(17, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Portugal', 'PT'),
+(18, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Greece', 'GR'),
+(19, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 'Saudi Arabia', 'SA'),
+(20, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Russian Federation', 'RU'),
+(21, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'United Kingdom', 'GB'),
+(22, 'пїЅпїЅпїЅпїЅпїЅ', 'Denmark', 'DK'),
+(23, 'пїЅпїЅпїЅ', 'United States', 'US'),
+(24, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Canada', 'CA'),
+(25, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Mexico', 'MX'),
+(26, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Bermuda', 'BM'),
+(27, 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ', 'Puerto Rico', 'PR'),
+(28, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ', 'Virgin Islands, U.S.', 'VI'),
+(29, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Germany', 'DE'),
+(30, 'пїЅпїЅпїЅпїЅ', 'Iran', 'IR'),
+(31, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Bolivia', 'BO'),
+(32, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Montserrat', 'MS'),
+(33, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Netherlands', 'NL'),
+(34, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Israel', 'IL'),
+(35, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Spain', 'ES'),
+(36, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Bahamas', 'BS'),
+(37, 'пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Saint Vincent and the Grenadines', 'VC'),
+(38, 'пїЅпїЅпїЅпїЅ', 'Chile', 'CL'),
+(39, 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'New Caledonia', 'NC'),
+(40, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Argentina', 'AR'),
+(41, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Dominica', 'DM'),
+(42, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Singapore', 'SG'),
+(43, 'пїЅпїЅпїЅпїЅпїЅ', 'Nepal', 'NP'),
+(44, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Philippines', 'PH'),
+(45, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Indonesia', 'ID'),
+(46, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Pakistan', 'PK'),
+(47, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Tokelau', 'TK'),
+(48, 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'New Zealand', 'NZ'),
+(49, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Cambodia', 'KH'),
+(50, 'пїЅпїЅпїЅпїЅпїЅ', 'Macau', 'MO'),
+(51, 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 'Papua New Guinea', 'PG'),
+(52, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Maldives', 'MV'),
+(53, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Afghanistan', 'AF'),
+(54, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Bangladesh', 'BD'),
+(55, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Ireland', 'IE'),
+(56, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Belgium', 'BE'),
+(57, 'пїЅпїЅпїЅпїЅпїЅ', 'Belize', 'BZ'),
+(58, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Brazil', 'BR'),
+(59, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Switzerland', 'CH'),
+(60, 'пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'South Africa', 'ZA'),
+(61, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Egypt', 'EG'),
+(62, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Nigeria', 'NG'),
+(63, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Tanzania', 'TZ'),
+(64, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Zambia', 'ZM'),
+(65, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Senegal', 'SN'),
+(66, 'пїЅпїЅпїЅпїЅ', 'Ghana', 'GH'),
+(67, 'пїЅпїЅпїЅпїЅпїЅ', 'Sudan', 'SD'),
+(68, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Cameroon', 'CM'),
+(69, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Malawi', 'MW'),
+(70, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Angola', 'AO'),
+(71, 'пїЅпїЅпїЅпїЅпїЅ', 'Kenya', 'KE'),
+(72, 'пїЅпїЅпїЅпїЅпїЅ', 'Gabon', 'GA'),
+(73, 'пїЅпїЅпїЅпїЅ', 'Mali', 'ML'),
+(74, 'пїЅпїЅпїЅпїЅпїЅ', 'Benin', 'BJ'),
+(75, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Madagascar', 'MG'),
+(76, 'пїЅпїЅпїЅ', 'Chad', 'TD'),
+(77, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Botswana', 'BW'),
+(78, 'пїЅпїЅпїЅпїЅпїЅ', 'Libya', 'LY'),
+(79, 'пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ', 'Cape Verde', 'CV'),
+(80, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Rwanda', 'RW'),
+(81, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Mozambique', 'MZ'),
+(82, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Gambia', 'GM'),
+(83, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Lesotho', 'LS'),
+(84, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Mauritius', 'MU'),
+(85, 'пїЅпїЅпїЅпїЅпїЅ', 'Congo', 'CG'),
+(86, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Uganda', 'UG'),
+(87, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ', 'Burkina Faso', 'BF'),
+(88, 'пїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ', 'Sierra Leone', 'SL'),
+(89, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Somalia', 'SO'),
+(90, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Zimbabwe', 'ZW'),
+(91, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'Democratic Republic Of The Congo', 'CD'),
+(92, 'пїЅпїЅпїЅпїЅпїЅ', 'Niger', 'NE'),
+(93, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Central African Republic', 'CF'),
+(94, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Swaziland', 'SZ'),
+(95, 'пїЅпїЅпїЅпїЅ', 'Togo', 'TG'),
+(96, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Guinea', 'GN'),
+(97, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Liberia', 'LR'),
+(98, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Seychelles', 'SC'),
+(99, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Morocco', 'MA'),
+(100, 'пїЅпїЅпїЅпїЅпїЅ', 'Algeria', 'DZ'),
+(101, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Mauritania', 'MR'),
+(102, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Namibia', 'NA'),
+(103, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Djibouti', 'DJ'),
+(105, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Comoros', 'KM'),
+(106, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Reunion', 'RE'),
+(107, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 'Equatorial Guinea', 'GQ'),
+(108, 'пїЅпїЅпїЅпїЅпїЅ', 'Tunisia', 'TN'),
+(109, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Turkey', 'TR'),
+(110, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Poland', 'PL'),
+(111, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Latvia', 'LV'),
+(112, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Ukraine', 'UA'),
+(113, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Belarus', 'BY'),
+(114, 'пїЅпїЅпїЅпїЅпїЅ', 'Czech Republic', 'CZ'),
+(115, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Palestinian Territory', 'PS'),
+(116, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Iceland', 'IS'),
+(117, 'пїЅпїЅпїЅпїЅ', 'Cyprus', 'CY'),
+(118, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Hungary', 'HU'),
+(119, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Slovakia', 'SK'),
+(120, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Serbia', 'RS'),
+(121, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Bulgaria', 'BG'),
+(122, 'пїЅпїЅпїЅпїЅ', 'Oman', 'OM'),
+(123, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Romania', 'RO'),
+(124, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Georgia', 'GE'),
+(125, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Norway', 'NO'),
+(126, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Armenia', 'AM'),
+(127, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Austria', 'AT'),
+(128, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Albania', 'AL'),
+(129, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Slovenia', 'SI'),
+(130, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Panama', 'PA'),
+(131, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Brunei Darussalam', 'BN'),
+(132, 'пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ', 'Sri Lanka', 'LK'),
+(133, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Montenegro', 'ME'),
+(134, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ', 'Europe', 'EU'),
+(135, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Tajikistan', 'TJ'),
+(136, 'пїЅпїЅпїЅпїЅ', 'Iraq', 'IQ'),
+(137, 'пїЅпїЅпїЅпїЅпїЅ', 'Lebanon', 'LB'),
+(138, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Moldova', 'MD'),
+(139, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Finland', 'FI'),
+(140, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Estonia', 'EE'),
+(141, 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Bosnia and Herzegovina', 'BA'),
+(142, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Kuwait', 'KW'),
+(143, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Aland Islands', 'AX'),
+(144, 'пїЅпїЅпїЅпїЅпїЅ', 'Lithuania', 'LT'),
+(145, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Luxembourg', 'LU'),
+(146, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Antigua and Barbuda', 'AG'),
+(147, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Macedonia', 'MK'),
+(148, 'пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ', 'San Marino', 'SM'),
+(149, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Malta', 'MT'),
+(150, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Falkland Islands', 'FK'),
+(151, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Bahrain', 'BH'),
+(152, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Uzbekistan', 'UZ'),
+(153, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Azerbaijan', 'AZ'),
+(154, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Monaco', 'MC'),
+(155, 'пїЅпїЅпїЅпїЅпїЅ', 'Haiti', 'HT'),
+(156, 'пїЅпїЅпїЅпїЅ', 'Guam', 'GU'),
+(157, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Jamaica', 'JM'),
+(158, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ', 'United States Minor Outlying Islands', 'UM'),
+(159, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Micronesia', 'FM'),
+(160, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Ecuador', 'EC'),
+(161, 'пїЅпїЅпїЅпїЅ', 'Peru', 'PE'),
+(162, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Cayman Islands', 'KY'),
+(163, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Colombia', 'CO'),
+(164, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Honduras', 'HN'),
+(165, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Netherlands Antilles', 'AN'),
+(166, 'пїЅпїЅпїЅпїЅпїЅ', 'Yemen', 'YE'),
+(167, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Virgin Islands, British', 'VG'),
+(168, 'пїЅпїЅпїЅпїЅпїЅ', 'Syria', 'SY'),
+(169, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Nicaragua', 'NI'),
+(170, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Dominican Republic', 'DO'),
+(171, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Grenada', 'GD'),
+(172, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Guatemala', 'GT'),
+(173, 'пїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ', 'Costa Rica', 'CR'),
+(174, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'El Salvador', 'SV'),
+(175, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Venezuela', 'VE'),
+(176, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Barbados', 'BB'),
+(177, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 'Trinidad and Tobago', 'TT'),
+(178, 'пїЅпїЅпїЅпїЅ', 'Bouvet Island', 'BV'),
+(179, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Marshall Islands', 'MH'),
+(180, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ', 'Cook Islands', 'CK'),
+(181, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Gibraltar', 'GI'),
+(182, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Paraguay', 'PY'),
+(247, 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'South Sudan', 'SS'),
+(184, 'пїЅпїЅпїЅпїЅпїЅ', 'Samoa', 'WS'),
+(185, 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ', 'Saint Kitts and Nevis', 'KN'),
+(186, 'пїЅпїЅпїЅпїЅпїЅ', 'Fiji', 'FJ'),
+(187, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Uruguay', 'UY'),
+(188, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Northern Mariana Islands', 'MP'),
+(189, 'пїЅпїЅпїЅпїЅпїЅ', 'Palau', 'PW'),
+(190, 'пїЅпїЅпїЅпїЅпїЅ', 'Qatar', 'QA'),
+(191, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Jordan', 'JO'),
+(192, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'American Samoa', 'AS'),
+(193, 'пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 'Turks and Caicos Islands', 'TC'),
+(194, 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'Saint Lucia', 'LC'),
+(195, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Mongolia', 'MN'),
+(196, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Holy See', 'VA'),
+(197, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Aruba', 'AW'),
+(198, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Guyana', 'GY'),
+(199, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Suriname', 'SR'),
+(200, 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ', 'Isle of Man', 'IM'),
+(201, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Vanuatu', 'VU'),
+(202, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Croatia', 'HR'),
+(203, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Anguilla', 'AI'),
+(204, 'пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Saint Pierre and Miquelon', 'PM'),
+(205, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Guadeloupe', 'GP'),
+(206, 'пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ', 'Saint Martin', 'MF'),
+(207, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Guernsey', 'GG'),
+(208, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Burundi', 'BI'),
+(209, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Turkmenistan', 'TM'),
+(210, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Kyrgyzstan', 'KG'),
+(211, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Myanmar', 'MM'),
+(212, 'пїЅпїЅпїЅпїЅпїЅ', 'Bhutan', 'BT'),
+(213, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Liechtenstein', 'LI'),
+(214, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Faroe Islands', 'FO'),
+(215, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Ethiopia', 'ET'),
+(216, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Martinique', 'MQ'),
+(217, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Jersey', 'JE'),
+(218, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Andorra', 'AD'),
+(219, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Antarctica', 'AQ'),
+(220, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 'British Indian Ocean Territory', 'IO'),
+(221, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Greenland', 'GL'),
+(222, 'пїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ', 'Guinea-Bissau', 'GW'),
+(223, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Eritrea', 'ER'),
+(224, 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 'Wallis and Futuna', 'WF'),
+(225, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'French Polynesia', 'PF'),
+(226, 'пїЅпїЅпїЅпїЅ', 'Cuba', 'CU'),
+(227, 'пїЅпїЅпїЅпїЅпїЅ', 'Tonga', 'TO'),
+(228, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'Timor-Leste', 'TL'),
+(229, 'пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Sao Tome and Principe', 'ST'),
+(230, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 'French Guiana', 'GF'),
+(231, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Solomon Islands', 'SB'),
+(232, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'Tuvalu', 'TV'),
+(233, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Kiribati', 'KI'),
+(234, 'пїЅпїЅпїЅпїЅ', 'Niue', 'NU'),
+(235, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Norfolk Island', 'NF'),
+(236, 'пїЅпїЅпїЅпїЅпїЅ', 'Nauru', 'NR'),
+(237, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Mayotte', 'YT'),
+(238, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Pitcairn Islands', 'PN'),
+(239, 'пїЅпїЅпїЅ-пїЅ''пїЅпїЅпїЅпїЅпїЅ', 'Cote D''Ivoire', 'CI'),
+(240, 'пїЅпїЅпїЅпїЅ', 'Lao', 'LA'),
+(241, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Democratic People''s Republic of Korea', 'KP'),
+(242, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ', 'Svalbard and Jan Mayen', 'SJ'),
+(243, 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'Saint Helena', 'SH'),
+(244, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'Cocos (Keeling) Islands', 'CC'),
+(245, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 'Western Sahara', 'EH');";
+
+
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table geo_country added data". '<br />';
+}else{
+    echo "Table geo_country added data allredy ". '<br />';
+}
+
+
+$sql = "CREATE TABLE IF NOT EXISTS `geo_city` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`country_id` int(11) DEFAULT NULL,
+`name_ru` varchar(100) DEFAULT NULL,
+`name_en` varchar(100) DEFAULT NULL,
+`region` varchar(2) DEFAULT NULL,
+`postal_code` varchar(10) DEFAULT NULL,
+`latitude` varchar(10) DEFAULT NULL,
+`longitude` varchar(10) DEFAULT NULL,
+PRIMARY KEY (`id`),
+KEY `country_id` (`country_id`),
+KEY `name_ru` (`name_ru`),
+KEY `name_en` (`name_en`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=438354 ;";
+
+
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table geo_city created". '<br />';
+}else{
+    echo "Table geo_city allready exist". '<br />';
+}
+
+
+
+$sql = "CREATE TABLE IF NOT EXISTS `blog_comments` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`parent_id` int(11) DEFAULT NULL,
+`blog_id` int(11) DEFAULT NULL,
+`created_at` int(11) DEFAULT NULL,
+`author_name` text,
+`email` varchar(255) DEFAULT NULL,
+`city` varchar(255) DEFAULT NULL,
+`text` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
+
+
+
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table blog_comments created". '<br />';
+}else{
+    echo "Table blog_comments allredy exist". '<br />';
+}
+$sql = "CREATE TABLE IF NOT EXISTS `order_items` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`order_id` int(11) NOT NULL,
+`ip` varchar(255) NOT NULL,
+`goods_id` int(11) NOT NULL,
+`quantity` int(11) NOT NULL,
+`price` int(11) NOT NULL,
+`category_id` int(11) NOT NULL,
+`brend_id` int(11) DEFAULT NULL,
+PRIMARY KEY (`id`),
+KEY `goods_id` (`goods_id`),
+KEY `category_id` (`category_id`,`brend_id`),
+KEY `brend_id` (`brend_id`),
+KEY `order_id` (`order_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;";
+
+
+
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table order_items created". '<br />';
+}else{
+    echo "Table order_items allredy exist". '<br />';
+}
+
+$sql = "CREATE TABLE IF NOT EXISTS `reqvizit` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`company_name` varchar(100) NOT NULL,
+`country` varchar(100) NOT NULL,
+`address` varchar(255) NOT NULL,
+`mobile` varchar(100) NOT NULL,
+`fax` varchar(100) NOT NULL,
+`email` varchar(255) NOT NULL,
+`schet` varchar(255) NOT NULL,
+`inn` varchar(255) NOT NULL,
+`zip_code` int(11) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;";
+
+
+
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table reqvizit created". '<br />';
+}else{
+    echo "Table reqvizit allredy exist". '<br />';
+}
+
+
+$sql = "INSERT INTO `reqvizit` (`id`, `company_name`, `country`, `address`, `mobile`, `fax`, `email`, `schet`, `inn`, `zip_code`) VALUES
+(1, 'kotmonnstr-shop', 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ.пїЅпїЅпїЅпїЅпїЅпїЅ 2', '+7 789 898 6250', '+7 789 898 6250', 'kotmonstr@ukr.net', '11212344343443434', '4543546665444', 927001);
+";
+
+
+
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table reqvizit data added". '<br />';
+}else{
+    echo "Table reqvizit data added allredy". '<br />';
+}
+
+
+$filename = $_SERVER['DOCUMENT_ROOT'].'/'.'geo_city.sql';
+// Temporary variable, used to store current query
+$templine = '';
+// Read in entire file
+$lines = file($filename);
+// Loop through each line
+foreach ($lines as $line)
+{
+// Skip it if it's a comment
+    if (substr($line, 0, 2) == '--' || $line == '')
+        continue;
+
+// Add this line to the current segment
+    $templine .= $line;
+// If it has a semicolon at the end, it's the end of the query
+    if (substr(trim($line), -1, 1) == ';')
+    {
+        // Perform the query
+        $conn->query($templine);
+        // Reset temp variable to empty
+        $templine = '';
+    }
+}
+echo "<br />Table geo_city imported successfully <br />";
+
+
+
+
+$filename = $_SERVER['DOCUMENT_ROOT'].'/'.'geo_country.sql';
+// Temporary variable, used to store current query
+$templine = '';
+// Read in entire file
+$lines = file($filename);
+// Loop through each line
+foreach ($lines as $line)
+{
+// Skip it if it's a comment
+    if (substr($line, 0, 2) == '--' || $line == '')
+        continue;
+
+// Add this line to the current segment
+    $templine .= $line;
+// If it has a semicolon at the end, it's the end of the query
+    if (substr(trim($line), -1, 1) == ';')
+    {
+        // Perform the query
+        $conn->query($templine);
+        // Reset temp variable to empty
+        $templine = '';
+    }
+}
+echo "Table geo_country imported successfully<br />";
 $conn->close();
 die();
 ?>
-
-
 

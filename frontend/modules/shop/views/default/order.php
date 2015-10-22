@@ -46,6 +46,7 @@ switch ($data['currCurency']) {
 ?>
 
 
+
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">

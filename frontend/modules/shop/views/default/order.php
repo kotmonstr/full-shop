@@ -1,11 +1,77 @@
+<?php
+use yii\helpers\Url;
+use common\models\Cart;
+use yii\helpers\StringHelper;
+use common\models\Exchange;
+use frontend\helpers\SetupSite;
+
+$USD  = substr(SetupSite::getCurs("USD"),0);
+$EUR  = substr(SetupSite::getCurs("EUR"),0);
+$UKR = substr(SetupSite::getCurs("UAH"),0);
+$Module = Yii::$app->getModule('shop');
+$i = 1;
+
+echo $this->render('/menu/_header', [
+    'data' => $data,
+    'USD' => $USD,
+    'UKR' => $UKR,
+    'EUR' => $EUR,
+]);
+//vd($data['currCurency']);
+switch ($data['currCurency']) {
+    case 'RUB':
+        $PRICE_1 = '';
+        $PRICE_2 = ' Руб';
+        $VALUTE = 1;
+        break;
+    case 'DOLLAR':
+        $PRICE_1 = '$ ';
+        $PRICE_2 = '';
+        $VALUTE = $USD;
+        break;
+    case 'UAN':
+        $PRICE_1 = '';
+        $PRICE_2 = ' Грв';
+        $VALUTE = $UKR;
+        break;
+    default:
+        $PRICE_1 = '';
+        $PRICE_2 = ' Руб';
+        $VALUTE = 1;
+
+
+}
+
+
+?>
+
+
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Check out</li>
+                <li><a href="/shop/index">Главная</a></li>
+                <li class="active">Мои заказы</li>
             </ol>
         </div><!--/breadcrums-->
+
+
+<?php if(!$model){ ?>
+        <div class="register-req" style="text-align: center">
+            <p>Ваша история заказов отсутствует</p>
+        </div>
+        <?php }else{ ?>
+
+    <?php foreach($model as $order){ ?>
+        <div class="step-one">
+            <a href="<?= Url::to(['/shop/order-detail','id'=> $order->id]); ?>"><h2 class="heading"><?= 'Заказ #: ' . $order->id . ' от ' .date("d-m-Y H:i",$order->created_at) . ' Статус: ' . $order->status; ?></h2></a>
+        </div>
+
+   <?php }?>
+
+        <?php } ?>
+
+
 
         <div class="step-one">
             <h2 class="heading">Step1</h2>
@@ -26,9 +92,7 @@
             </ul>
         </div><!--/checkout-options-->
 
-        <div class="register-req">
-            <p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-        </div><!--/register-req-->
+
 
         <div class="shopper-informations">
             <div class="row">

@@ -371,11 +371,14 @@ class DefaultController extends Controller
     // Мой заказ
     public function actionOrder()
     {
+        $data = $this->getCommonDate();
         $iP = Yii::$app->session->id;
         $model = Order::getAllByIp($iP);
         $quantityInCart = Cart::getQountAllByIp($iP);
         return $this->render('order', ['model' => $model,
-            'quantityInCart' => $quantityInCart,]);
+            'quantityInCart' => $quantityInCart,
+            'data' => $data,
+        ]);
     }
 
     //***************************************** functions **************************************************************

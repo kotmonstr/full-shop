@@ -12,6 +12,8 @@ echo $this->render('/menu/_header', [
     'data' => $data,
 
 ]);
+
+$email = isset(Yii::$app->user->identity->email) ? Yii::$app->user->identity->email : '';
 ?>
 
 
@@ -213,7 +215,7 @@ echo $this->render('/menu/_header', [
                         <?= $form->field($model_form, 'recall')->checkbox()->label('') ?>
 
                         <label>Зарегистрировать меня под логином :</label>
-                        <?= $form->field($model_form, 'login')->textInput()->label('') ?>
+                        <?= $form->field($model_form, 'login')->textInput(['value'=>$email])->label('') ?>
 
                         <label>Зарегистрировать меня c паролем :</label>
                         <?= $form->field($model_form, 'password')->passwordInput()->label('') ?>

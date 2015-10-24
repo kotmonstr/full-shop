@@ -378,8 +378,9 @@ class DefaultController extends Controller
             return $this->redirect('/shop/login');
         }
         $data = $this->getCommonDate();
-        $login = Yii::$app->user->identity->email;
-        $model = Order::getAllByLogin($login);
+        $email = Yii::$app->user->identity->email;
+       // vd($email);
+        $model = Order::getAllByLogin($email);
         $quantityInCart = Cart::getQountAllByIp($iP);
         return $this->render('order', ['model' => $model,
             'quantityInCart' => $quantityInCart,

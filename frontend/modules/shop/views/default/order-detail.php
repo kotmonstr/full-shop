@@ -41,7 +41,7 @@ switch ($data['currCurency']) {
 
 
 }
-
+ $summ=0;
 
 ?>
 
@@ -106,9 +106,25 @@ switch ($data['currCurency']) {
                             </td>
 
                         </tr>
-
+<?php $summ = $summ + ($item->price * $item->quantity) ; ?>
 
                         <?php } ?>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <p class="cart_total_price">Итого:</p>
+                            </td>
+                            <td>
+                                <p class="cart_total_price"> $<?= $summ ?></p>
+                            </td>
+
+
+                        </tr>
                         </tbody>
                     </table>
                 </div>

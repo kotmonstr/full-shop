@@ -92,12 +92,14 @@ class OrderItems extends \yii\db\ActiveRecord
         return $this->hasOne(Goods::className(), ['id' => 'goods_id']);
     }
 
+
     // Добавление товаров в заказ
-    public static function Add($model,$order_id,$created_at){
+    public static function Add($model, $order_id, $created_at)
+    {
         //vd($model);
-        $arrResult=[];
-        $i=0;
-        foreach($model as $good){
+        $arrResult = [];
+        $i = 0;
+        foreach ($model as $good) {
             $i++;
             $model = new self;
             $model->order_id = $order_id;
@@ -110,12 +112,23 @@ class OrderItems extends \yii\db\ActiveRecord
             $model->created_at = $created_at;
             $model->save();
 
-            $arrResult[$i]['created_at']=$created_at;
+            $arrResult[$i]['created_at'] = $created_at;
             $arrResult[$i]['good_id'] = $model->goods_id;
             $arrResult[$i]['quantity'] = $model->quantity;
             $arrResult[$i]['price'] = $model->price;
 
         }
         return $arrResult;
+    }
+
+    public static function getOrderDetailById($id)
+    {
+        $model = self::find()->where(['order_id' => $id])->all();
+        if ($model) {
+            return $model;
+        } else {
+            return false;
+        }
+
     }
 }

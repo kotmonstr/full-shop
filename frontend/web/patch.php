@@ -53,7 +53,7 @@ KEY `brend_id` (`brend_id`),
 KEY `brend_id_2` (`brend_id`),
 KEY `user_id` (`created_by`),
 KEY `user_id_2` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='������' AUTO_INCREMENT=52 ;";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 $conn->query($sql);
 if ($conn->error) {
     echo "Table goods created" . '<br />';
@@ -113,7 +113,7 @@ PRIMARY KEY (`id`),
 KEY `goods_id` (`goods_id`),
 KEY `category_id` (`category_id`,`brend_id`),
 KEY `brend_id` (`brend_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=73 ;";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 $conn->query($sql);
 if ($conn->error) {
     echo "Table cart created" . '<br />';
@@ -657,7 +657,7 @@ KEY `goods_id` (`goods_id`),
 KEY `category_id` (`category_id`,`brend_id`),
 KEY `brend_id` (`brend_id`),
 KEY `order_id` (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 
 
 
@@ -667,6 +667,19 @@ if ($conn->error) {
 }else{
     echo "Table order_items allredy exist". '<br />';
 }
+
+$sql = "ALTER TABLE  `order_items` ADD FOREIGN KEY (  `goods_id` ) REFERENCES  `shop`.`goods` (
+`id`
+) ON DELETE NO ACTION ON UPDATE RESTRICT ;";
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table order_items updated". '<br />';
+}else{
+    echo "Table order_items allredy updated". '<br />';
+}
+
+
+
 
 $sql = "CREATE TABLE IF NOT EXISTS `reqvizit` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -783,6 +796,31 @@ foreach ($lines as $line)
     }
 }
 echo "Table order_status imported successfully<br />";
+
+$filename = $_SERVER['DOCUMENT_ROOT'].'/sqls/'.'contacts.sql';
+// Temporary variable, used to store current query
+$templine = '';
+// Read in entire file
+$lines = file($filename);
+// Loop through each line
+foreach ($lines as $line)
+{
+// Skip it if it's a comment
+    if (substr($line, 0, 2) == '--' || $line == '')
+        continue;
+
+// Add this line to the current segment
+    $templine .= $line;
+// If it has a semicolon at the end, it's the end of the query
+    if (substr(trim($line), -1, 1) == ';')
+    {
+        // Perform the query
+        $conn->query($templine);
+        // Reset temp variable to empty
+        $templine = '';
+    }
+}
+echo "Table contacts imported successfully<br />";
 
 
 $sql = "CREATE TABLE IF NOT EXISTS `order` (

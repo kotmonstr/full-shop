@@ -77,12 +77,29 @@ public function attributeLabels()
         ];
     }
 
-    public static function getAllByIp($ip){
-        $model = self::find()->where(['ip'=>$ip])->all();
+    public static function getAllByLogin($login){
+        $model = self::find()->where(['login'=>$login])->all();
         if($model){
             return  $model;
         }else{
             return false;
         }
     }
+   public static function getOrderById($id){
+        $model = self::find()->where(['id'=>$id])->one();
+        if($model){
+            return  $model;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatus0()
+    {
+        return $this->hasOne(OrderStatus::className(), ['id' => 'status']);
+    }
+
 }

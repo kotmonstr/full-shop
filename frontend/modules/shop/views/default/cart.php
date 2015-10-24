@@ -31,7 +31,7 @@ echo $this->render('/menu/_header', [
                 <thead>
                 <tr class="cart_menu">
                     <td class="image">Товар</td>
-                    <td class="description"></td>
+                    <td class="description">Описание</td>
                     <td class="price">Цена</td>
                     <td class="quantity">Количество</td>
                     <td class="total">Итого</td>

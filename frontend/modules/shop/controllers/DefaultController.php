@@ -78,7 +78,8 @@ class DefaultController extends Controller
                             'test',
                             'recalculate',
                             'cart-form-submit',
-                            'accept-blog-comment'
+                            'accept-blog-comment',
+                            'order-detail'
 
                         ],
                         'allow' => true,
@@ -371,9 +372,14 @@ class DefaultController extends Controller
     // Мой заказ
     public function actionOrder()
     {
-        $data = $this->getCommonDate();
         $iP = Yii::$app->session->id;
-        $model = Order::getAllByIp($iP);
+        if(Yii::$app->user->isGuest){
+            Yii::$app->getSession()->setFlash('success', 'Для просмотра истории заказов необходимо войти под своим именем');
+            return $this->redirect('/shop/login');
+        }
+        $data = $this->getCommonDate();
+        $login = Yii::$app->user->identity->email;
+        $model = Order::getAllByLogin($login);
         $quantityInCart = Cart::getQountAllByIp($iP);
         return $this->render('order', ['model' => $model,
             'quantityInCart' => $quantityInCart,
@@ -914,5 +920,17 @@ class DefaultController extends Controller
             //$this->refresh();
         }
 
+    }
+    public function actionOrderDetail($id){
+        $modelOrder = Order::getOrderById($id);
+        $modelOrderDetail = OrderItems::getOrderDetailById($id);
+        $data = $this->getCommonDate();
+        return $this->render('order-detail',
+            [
+            'data' => $data,
+            'modelOrder'=> $modelOrder,
+            'modelOrderDetail'=> $modelOrderDetail
+            ]
+        );
     }
 }

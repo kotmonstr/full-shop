@@ -306,34 +306,7 @@ if ($conn->error) {
     echo "Table photo allredy exist" . '<br />';
 }
 
-$sql = "CREATE TABLE IF NOT EXISTS `order` (
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`ip` varchar(255) NOT NULL,
-`status` tinyint(4) NOT NULL COMMENT '1-���� ������, 2 �����������, 3 - ��������',
-`created_at` int(11) NOT NULL,
-`country_id` int(11) NOT NULL,
-`city_id` int(11) NOT NULL,
-`post_index` int(11) DEFAULT NULL,
-`first_name` varchar(100) NOT NULL,
-`second_name` varchar(100) NOT NULL,
-`ser_name` varchar(100) NOT NULL,
-`payment_type` tinyint(4) NOT NULL,
-`telephone` varchar(255) NOT NULL,
-`street` varchar(255) DEFAULT NULL,
-`comment` text,
-`recall` tinyint(4) NOT NULL DEFAULT '0',
-`login` varchar(50) DEFAULT NULL,
-`password` varchar(50) DEFAULT NULL,
-PRIMARY KEY (`id`),
-KEY `country_id` (`country_id`),
-KEY `city_id` (`city_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;";
-$conn->query($sql);
-if ($conn->error) {
-    echo "Table order created" . '<br />';
-}else{
-    echo "Table order allredy exist" . '<br />';
-}
+
 
 
 $sql = "CREATE TABLE IF NOT EXISTS `setup` (
@@ -733,7 +706,7 @@ if ($conn->error) {
 }
 
 
-$filename = $_SERVER['DOCUMENT_ROOT'].'/'.'geo_city.sql';
+$filename = $_SERVER['DOCUMENT_ROOT'].'/sqls/'.'geo_city.sql';
 // Temporary variable, used to store current query
 $templine = '';
 // Read in entire file
@@ -761,7 +734,7 @@ echo "<br />Table geo_city imported successfully <br />";
 
 
 
-$filename = $_SERVER['DOCUMENT_ROOT'].'/'.'geo_country.sql';
+$filename = $_SERVER['DOCUMENT_ROOT'].'/sqls/'.'geo_country.sql';
 // Temporary variable, used to store current query
 $templine = '';
 // Read in entire file
@@ -785,7 +758,77 @@ foreach ($lines as $line)
     }
 }
 echo "Table geo_country imported successfully<br />";
+
+$filename = $_SERVER['DOCUMENT_ROOT'].'/sqls/'.'order_status.sql';
+// Temporary variable, used to store current query
+$templine = '';
+// Read in entire file
+$lines = file($filename);
+// Loop through each line
+foreach ($lines as $line)
+{
+// Skip it if it's a comment
+    if (substr($line, 0, 2) == '--' || $line == '')
+        continue;
+
+// Add this line to the current segment
+    $templine .= $line;
+// If it has a semicolon at the end, it's the end of the query
+    if (substr(trim($line), -1, 1) == ';')
+    {
+        // Perform the query
+        $conn->query($templine);
+        // Reset temp variable to empty
+        $templine = '';
+    }
+}
+echo "Table order_status imported successfully<br />";
+
+
+$sql = "CREATE TABLE IF NOT EXISTS `order` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`ip` varchar(255) NOT NULL,
+`status` int(11) NOT NULL COMMENT '1-���� ������, 2 �����������, 3 - ��������',
+`created_at` int(11) NOT NULL,
+`country_id` int(11) NOT NULL,
+`city_id` int(11) NOT NULL,
+`post_index` int(11) DEFAULT NULL,
+`first_name` varchar(100) NOT NULL,
+`second_name` varchar(100) NOT NULL,
+`ser_name` varchar(100) NOT NULL,
+`payment_type` tinyint(4) NOT NULL,
+`telephone` varchar(255) NOT NULL,
+`street` varchar(255) DEFAULT NULL,
+`comment` text,
+`recall` tinyint(4) NOT NULL DEFAULT '0',
+`login` varchar(50) DEFAULT NULL,
+`password` varchar(50) DEFAULT NULL,
+PRIMARY KEY (`id`),
+KEY `country_id` (`country_id`),
+KEY `city_id` (`city_id`),
+KEY `status` (`status`,`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;";
+
+
+
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table order created". '<br />';
+}else{
+    echo "Table order allredy exist". '<br />';
+}
+
+$sql = "ALTER TABLE `order` ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`status`) REFERENCES `order_status` (`id`);";
+$conn->query($sql);
+if ($conn->error) {
+    echo "order updated". '<br />';
+}else{
+    echo "order allredy updated". '<br />';
+}
+
+
+
+
 $conn->close();
 die();
 ?>
-

@@ -42,7 +42,6 @@ class OrderItems extends \yii\db\ActiveRecord
             [['ip'], 'string', 'max' => 255]
         ];
     }
-
     /**
      * @inheritdoc
      */

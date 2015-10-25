@@ -16,12 +16,13 @@
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "2.0.5",
-"yiisoft/yii2-imagine": "2.0.3",
+        "yiisoft/yii2-imagine": "2.0.3",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "madcoda/php-youtube-api": "1.1.1",
         "vova07/yii2-imperavi-widget": "1.2.7",
-        "kartik-v/yii2-widgets": "v3.4.0"
+        "kartik-v/yii2-widgets": "v3.4.0",
+        "2amigos/yii2-file-upload-widget": "~1.0"
 
     },
     "require-dev": {

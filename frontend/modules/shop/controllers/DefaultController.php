@@ -886,7 +886,8 @@ class DefaultController extends Controller
                     //->setTextBody('Plain text content')
                     //->setHtmlBody('<b>Kotmonstr.ru</b>')
                     ->send();
-
+                //Todo Очистить корзину
+                 Cart::DeleteAllByIp($iP);
 
                 $this->redirect('/site/index');
             } else {

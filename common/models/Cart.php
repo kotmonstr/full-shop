@@ -74,6 +74,14 @@ class Cart extends \yii\db\ActiveRecord
             return false;
         }
     }
+      /*
+     * Очистить все товары пользователя
+     */
+    public static function DeleteAllByIp($ip)
+    {
+        $model = self::deleteAll(['ip' => $ip]);
+
+}
 
     /*
    * Вернет количество всех товаров пользователя

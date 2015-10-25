@@ -39,6 +39,8 @@ return array(
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base'),
     'kartik\\alert\\' => array($vendorDir . '/kartik-v/yii2-widget-alert'),
     'kartik\\affix\\' => array($vendorDir . '/kartik-v/yii2-widget-affix'),
+    'dosamigos\\gallery\\' => array($vendorDir . '/2amigos/yii2-gallery-widget/src'),
+    'dosamigos\\fileupload\\' => array($vendorDir . '/2amigos/yii2-file-upload-widget/src'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
 );

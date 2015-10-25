@@ -1,9 +1,44 @@
 Change Log: `bootstrap-fileinput`
 =================================
 
+## version 4.2.8
+
+**Date:** 23-Oct-2015
+
+1. Update bootstrap bower version to support only 3.x variants.
+2. Implement package.json.
+3. (enh #449): Add Arabic Translations.
+4. (enh #454): Update Turkish Translations.
+5. (enh #460): Update CSS selectors prefix to start with `file`.
+6. (enh #462): Responsive buttons and new property `buttonLabelClass`.
+7. (enh #474): Upload via button within each preview thumbnail skips last file for async uploads.
+8. (enh #477): Fix IE10 specific styling bug for file input block button.
+9. (enh #481): Universal Module Definition for use with CommonJS, AMD or browser globals.
+
+## version 4.2.7
+
+**Date**: 13-Sep-2015
+
+1. (bug #420): Revamp file status progress and positioning updates for asynchronous upload.
+2. (enh #427): Add image resizing capability before upload.
+3. (enh #428): Enhancements to asynchronous uploads when `showPreview` is `false`.
+4. (bug #429): Fix for MS Edge bug that does not support drag and drop.
+5. (enh #431): Add Danish locale translations.
+6. (enh #432): Send slugged file names with the file blob when uploading via ajax.
+7. (enh #433): Added new events for image handling.
+    - `fileimageloaded` (fires after each image is loaded in preview) - this is an existing event
+    - `fileimagesloaded` (fires after all images are loaded in preview)
+    - `fileimageresized` (fires after each image in preview is resized)
+    - `fileimagesresized` (fires after all images in preview are resized)
+    - `fileimageresizeerror` (fires when any image resize error is faced)
+8. (enh #434): Added Japanese translations.
+9. (enh #436): New property `showClose` and new layout template `close` to control close icon display.
+10. (enh #437): New property `defaultPreviewContent` to control a default preview.
+11. (bug #442); Enhance the filenames parsing in the filestack and slug conversion.
+
 ## version 4.2.6
 
-**Date**: 21-Aug-2015
+**Date**: 26-Aug-2015
 
 1. (enh #373): Default delete ajax request type to POST (instead of DELETE).
 2. (enh #376): Ability to validate initial/server files for max and min file count.
@@ -26,6 +61,7 @@ Change Log: `bootstrap-fileinput`
 19. (enh #410): Better validation for IE 10 and below.
 20. (enh #412): Enhancements to file upload cancellation.
 21. (enh #413): Various updates to translations.
+22. (enh #426): Enhancements to progress bar and display thumbnail specific progress.
 
 ## version 4.2.5
 

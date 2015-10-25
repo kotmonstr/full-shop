@@ -61,7 +61,6 @@ class Cart extends \yii\db\ActiveRecord
         return $this->hasOne(Goods::className(), ['id' => 'goods_id']);
     }
 
-
     /*
      * Вернет все товары пользователя
      */

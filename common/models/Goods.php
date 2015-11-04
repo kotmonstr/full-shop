@@ -62,7 +62,7 @@ class Goods extends \yii\db\ActiveRecord
     {
         return [
             [['item', 'price', 'category_id', 'quantity', 'descr', 'status'], 'required'],
-            [['price', 'category_id', 'quantity', 'status','best','rating','brend_id'], 'integer'],
+            [['price', 'category_id', 'quantity', 'status', 'best', 'rating', 'brend_id'], 'integer'],
             [['descr', 'image'], 'string'],
             [['item'], 'string', 'max' => 255],
             [['image_file'], 'file', 'extensions' => 'gif, jpg,png'],
@@ -84,8 +84,8 @@ class Goods extends \yii\db\ActiveRecord
             'status' => 'Статус',
             'image' => 'Картинка',
             'brend_id' => 'Бренд Id',
-            'best'=>'Рекомендованный',
-            'rating'=>'Рейтинг'
+            'best' => 'Рекомендованный',
+            'rating' => 'Рейтинг'
         ];
     }
 
@@ -105,13 +105,13 @@ class Goods extends \yii\db\ActiveRecord
         }
     }
 
-      /*
-     * Вернет рекомендованные товары
-     */
+    /*
+   * Вернет рекомендованные товары
+   */
     public static function getBest($max)
     {
         $model = self::find()
-            ->where(['status' => self::STATUS_ACTIVE,'best'=>self::BEST])
+            ->where(['status' => self::STATUS_ACTIVE, 'best' => self::BEST])
             ->orderBy('id DESC')
             ->limit($max)
             ->all();
@@ -149,9 +149,9 @@ class Goods extends \yii\db\ActiveRecord
         }
     }
 
-      /*
-     * Вернет Имя товара
-     */
+    /*
+   * Вернет Имя товара
+   */
     public static function getName($id)
     {
 
@@ -196,7 +196,7 @@ class Goods extends \yii\db\ActiveRecord
     {
         if ($id != 0) {
             $model = self::find()
-                ->where(['category_id' => $id,'status' => self::STATUS_ACTIVE])
+                ->where(['category_id' => $id, 'status' => self::STATUS_ACTIVE])
                 ->all();
         } else {
             $model = self::find()->all();
@@ -208,14 +208,15 @@ class Goods extends \yii\db\ActiveRecord
             return false;
         }
     }
-        /*
+
+    /*
 * Вернет товары этоГо Бренда
 */
     public static function getGoodsByBrendId($id)
     {
         if ($id != 0) {
             $model = self::find()
-                ->where(['brend_id' => $id,'status' => self::STATUS_ACTIVE])
+                ->where(['brend_id' => $id, 'status' => self::STATUS_ACTIVE])
                 ->all();
         } else {
             $model = self::find()->all();
@@ -235,7 +236,7 @@ class Goods extends \yii\db\ActiveRecord
     {
         if ($id != 0) {
             $model = self::find()
-                ->where(['brend_id' => $id,'status' => self::STATUS_ACTIVE])
+                ->where(['brend_id' => $id, 'status' => self::STATUS_ACTIVE])
                 ->all();
         } else {
             $model = self::find()->all();
@@ -248,16 +249,16 @@ class Goods extends \yii\db\ActiveRecord
         }
     }
 
-       /*
+    /*
 * Вернет товары этого пользователя
 */
     public static function getQuantityOfGoodsByUserId()
     {
 
 
-            $model = self::find()
-                ->where(['status' => self::STATUS_ACTIVE,'user_id'=> Yii::$app->user->id])
-                ->all();
+        $model = self::find()
+            ->where(['status' => self::STATUS_ACTIVE, 'user_id' => Yii::$app->user->id])
+            ->all();
 
 
         if ($model) {
@@ -274,7 +275,8 @@ class Goods extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Brend::className(), ['id' => 'brend_id']);
     }
-  /**
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getCategory()
@@ -282,6 +284,21 @@ class Goods extends \yii\db\ActiveRecord
         return $this->hasOne(GoodsCategory::className(), ['id' => 'category_id']);
     }
 
+/*
+ * return vodel goods by price range
+ */
+    public static function getGoodsByPriceRange($from, $to, $valute){
+        $model = self::find()
+            ->where(['>', 'price', $from])
+            ->AndWhere(['<', 'price', $to])
+            ->AndWhere(['status' => self::STATUS_ACTIVE])
+            ->all();
+        if ($model) {
+            return $model;
+        } else {
+            return false;
+        }
+    }
 
 
 }

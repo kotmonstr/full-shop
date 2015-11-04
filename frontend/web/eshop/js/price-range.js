@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================= */
- 
+
 !function( $ ) {
 
 	var Slider = function(element, options) {
@@ -151,14 +151,14 @@
 
 		over: false,
 		inDrag: false,
-		
+
 		showTooltip: function(){
 			this.tooltip.addClass('in');
 			//var left = Math.round(this.percent*this.width);
 			//this.tooltip.css('left', left - this.tooltip.outerWidth()/2);
 			this.over = true;
 		},
-		
+
 		hideTooltip: function(){
 			if (this.inDrag === false) {
 				this.tooltip.removeClass('in');
@@ -178,8 +178,8 @@
 			}
 			if (this.range) {
 				this.tooltipInner.text(
-					this.formater(this.value[0]) + 
-					' : ' + 
+					this.formater(this.value[0]) +
+					' : ' +
 					this.formater(this.value[1])
 				);
 				this.tooltip[0].style[this.stylePos] = this.size * (this.percentage[0] + (this.percentage[1] - this.percentage[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
@@ -240,7 +240,7 @@
 		},
 
 		mousemove: function(ev) {
-			
+
 			// Touch: Get the original event:
 			if (this.touchCapable && ev.type === 'touchmove') {
 				ev = ev.originalEvent;
@@ -270,6 +270,7 @@
 		},
 
 		mouseup: function(ev) {
+
 			if (this.touchCapable) {
 				// Touch: Bind touch events:
 				$(document).off({
@@ -296,6 +297,8 @@
 				})
 				.data('value', val)
 				.prop('value', val);
+			// aDD BY kOSTYA
+			sendAjaxData(val);
 			return false;
 		},
 
@@ -386,3 +389,26 @@
 	$.fn.slider.Constructor = Slider;
 
 }( window.jQuery );
+
+function sendAjaxData(data){
+	var csrf_token = $("meta[name=csrf-token]").attr("content");
+	valute = $('#valute').val();
+	$.ajax({
+		url: '/shop/get-goods-by-price-range',
+		type: 'POST',
+		dataType: 'json',
+		cache: false,
+		asinc: false,
+		data: {
+			_csrf: csrf_token,
+			data: data,
+			valute: valute,
+		},
+		success: function (data) {
+
+			$('.target-goods').html(data);
+
+
+		}
+	});
+}

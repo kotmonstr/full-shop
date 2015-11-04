@@ -19,6 +19,7 @@ echo $this->render('/menu/_header', [
     'USD' => $USD,
     'UKR' => $UKR,
     'EUR' => $EUR,
+    'dropMenuActive'=>'blog'
 ]);
 //vd($data['currCurency']);
 switch ($data['currCurency']) {
@@ -48,39 +49,11 @@ switch ($data['currCurency']) {
     <div class="container ">
         <div class="row">
             <div class="col-sm-3">
-                <div class="left-sidebar">
-                    <h2>Категории товаров</h2>
-                    <?= $this->render('/menu/_category-products', ['modelGoodsCategories' => $modelGoodsCategories,'Ajax'=> false]); ?>
-                    <!--/category-products-->
 
-                    <div class="brands_products"><!--brands_products-->
-                        <h2>Бренды</h2>
-                        <?= $this->render('/menu/_brands-name', ['modelBrends' => $modelBrends,'Ajax'=> false]); ?>
-                    </div>
-                    <!--/brands_products-->
-
-                    <div class="price-range"><!--price-range-->
-                        <h2>Цена</h2>
-
-                        <div class="well text-center">
-                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
-                                   data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br/>
-                            <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-                        </div>
-                    </div>
-                    <!--/price-range-->
-                    <!--shipping-->
-                    <div class="shipping text-center">
-                        <?= $this->render('/menu/_banner', ['modelBanner' => $modelBanner]); ?>
-
-                    </div>
-                    <!--/shipping-->
-
-                </div>
             </div>
 
             <?php if ($models){ ?>
-            <div class="col-sm-9">
+            <div class="col-sm-12">
                 <div class="blog-post-area">
                     <h2 class="title text-center">Новости</h2>
 
@@ -145,11 +118,11 @@ switch ($data['currCurency']) {
 
     }
 
-     .star-rating{
-         float: right;
-         /* top: -14px; */
-         margin-top: -30px;
-     }
+    .star-rating{
+        float: right;
+        /* top: -14px; */
+        margin-top: -30px;
+    }
     .single-blog-post img{
         max-width: 840px;;
     }

@@ -3,6 +3,6 @@ return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
-    'staticDomen'=>'http://static.shop.loc'
+    //'staticDomen'=>'http://static.shop.loc'
 
 ];

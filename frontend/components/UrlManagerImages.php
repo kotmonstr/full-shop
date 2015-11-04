@@ -11,7 +11,7 @@ class UrlManagerImages extends Component
     {
         if($url =='defaultUser')
         {
-            return  Yii::$app->params['staticDomen'].'/img/default_avatar.jpg';
+            return  '/img/default_avatar.jpg';
         }
     }
 

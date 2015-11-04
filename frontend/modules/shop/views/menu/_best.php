@@ -2,7 +2,7 @@
 use yii\helpers\StringHelper;
 
 ?>
-<?php if($modelBest): ?>
+<?php if($modelBest){ ?>
 <h2 class="title text-center">Рекомендуемые товары</h2>
 
 <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
@@ -30,8 +30,10 @@ use yii\helpers\StringHelper;
             </div>
 
             <?php endforeach; ?>
+
         </div>
         <div class="item">
+
             <?php foreach($modelBest as $best): ?>
 
                 <div class="col-sm-4">
@@ -52,6 +54,7 @@ use yii\helpers\StringHelper;
                 </div>
 
             <?php endforeach; ?>
+
         </div>
     </div>
     <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
@@ -61,7 +64,7 @@ use yii\helpers\StringHelper;
         <i class="fa fa-angle-right"></i>
     </a>
 </div>
-<?php endif; ?>
+<?php } ?>
 <style>
     .single-products{
         height: 345px!important;

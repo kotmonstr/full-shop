@@ -44,7 +44,7 @@ switch ($data['currCurency']) {
 
 
 ?>
-
+<input type="hidden" id="valute" value="<?= $data['currCurency'] ?>">
 <section id="slider"><!--slider-->
     <div class="container">
         <div class="row">
@@ -94,39 +94,14 @@ switch ($data['currCurency']) {
 <section>
     <div class="container ">
         <div class="row">
-            <div class="col-sm-3">
-                <div class="left-sidebar">
-                    <h2>Категории товаров</h2>
-                    <?= $this->render('/menu/_category-products', ['modelGoodsCategories' => $modelGoodsCategories]); ?>
-                    <!--/category-products-->
+            <?= $this->render('/menu/_sidebar', ['modelGoodsCategories' => $modelGoodsCategories,
+                'modelBrends' => $modelBrends,
+                'modelBanner' => $modelBanner,
+                'PRICE_1' => $PRICE_1,
+                'PRICE_2' => $PRICE_2,
+            ]);?>
 
-                    <div class="brands_products"><!--brands_products-->
-                        <h2>Бренды</h2>
-                        <?= $this->render('/menu/_brands-name', ['modelBrends' => $modelBrends]); ?>
-                    </div>
-                    <!--/brands_products-->
-
-                    <div class="price-range"><!--price-range-->
-                        <h2>Цена</h2>
-
-                        <div class="well text-center">
-                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
-                                   data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br/>
-                            <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-                        </div>
-                    </div>
-                    <!--/price-range-->
-                    <!--shipping-->
-                    <div class="shipping text-center">
-                        <?= $this->render('/menu/_banner', ['modelBanner' => $modelBanner]); ?>
-
-                    </div>
-                    <!--/shipping-->
-
-                </div>
-            </div>
-
-            <div class="col-sm-9 padding-right">
+            <div class="col-sm-9 padding-right target-goods">
                 <div class="features_items" id="start_animation"><!--features_items-->
                     <h2 class="title text-center">Товары</h2>
                     <?php if($modelNewGoods):?>
@@ -193,4 +168,7 @@ switch ($data['currCurency']) {
         height: 354px!important;
     }
 </style>
+<script>
+
+</script>
 

@@ -79,7 +79,8 @@ class DefaultController extends Controller
                             'recalculate',
                             'cart-form-submit',
                             'accept-blog-comment',
-                            'order-detail'
+                            'order-detail',
+                            'get-goods-by-price-range'
 
                         ],
                         'allow' => true,
@@ -214,6 +215,7 @@ class DefaultController extends Controller
     function actionProducts()
     {
         $categoria_id = Yii::$app->request->get('categoria');
+
         $brand_id = Yii::$app->request->get('brand');
 
         if ($categoria_id) {
@@ -230,8 +232,10 @@ class DefaultController extends Controller
         $modelsGoods = $query->offset($pages->offset)
             ->limit(3)
             ->all();
+        //vd($modelsGoods);
 
-
+        $modelBest = Goods::getBest(3);
+        $modelBanner = Banner::find()->where(['status' => 0])->all();
         $data = $this->getCommonDate();
         $iP = Yii::$app->session->id;
         $quantityInCart = Cart::getQountAllByIp($iP);
@@ -247,7 +251,9 @@ class DefaultController extends Controller
             'modelGoodsCategories' => $modelGoodsCategories,
             'model' => $model,
             'modelBrends' => $modelBrends,
-            'quantityInCart' => $quantityInCart
+            'quantityInCart' => $quantityInCart,
+            'modelBest' => $modelBest ? $modelBest : false,
+            'modelBanner' => $modelBanner,
         ]);
     }
 
@@ -277,6 +283,7 @@ class DefaultController extends Controller
 
     public function actionBlog()
     {
+        $this->layout='/blog';
         $countPostOnPage = SetupSite::getParam('countPostOnPage');
         $data = $this->getCommonDate();
         $modelGoodsCategories = GoodsCategory::find()->all();
@@ -319,7 +326,7 @@ class DefaultController extends Controller
             'modelGoodsCategories' => $modelGoodsCategories,
             'modelBrends' => $modelBrends,
             'modelBanner' => $modelBanner,
-            'modelBlogComents'=> $modelBlogComents
+            'modelBlogComents' => $modelBlogComents
 
         ]);
     }
@@ -373,13 +380,13 @@ class DefaultController extends Controller
     public function actionOrder()
     {
         $iP = Yii::$app->session->id;
-        if(Yii::$app->user->isGuest){
+        if (Yii::$app->user->isGuest) {
             Yii::$app->getSession()->setFlash('success', 'Для просмотра истории заказов необходимо войти под своим именем');
             return $this->redirect('/shop/login');
         }
         $data = $this->getCommonDate();
         $email = Yii::$app->user->identity->email;
-       // vd($email);
+        // vd($email);
         $model = Order::getAllByLogin($email);
         $quantityInCart = Cart::getQountAllByIp($iP);
         return $this->render('order', ['model' => $model,
@@ -887,7 +894,7 @@ class DefaultController extends Controller
                     //->setHtmlBody('<b>Kotmonstr.ru</b>')
                     ->send();
                 //Todo Очистить корзину
-                 Cart::DeleteAllByIp($iP);
+                Cart::DeleteAllByIp($iP);
 
                 $this->redirect('/site/index');
             } else {
@@ -917,22 +924,60 @@ class DefaultController extends Controller
 //            $model->validate();
 //            vd($model->getErrors());
             $model->save();
-            $this->redirect('/shop/blog-detail?id='.$model->blog_id);
-        }else{
+            $this->redirect('/shop/blog-detail?id=' . $model->blog_id);
+        } else {
             //$this->refresh();
         }
 
     }
-    public function actionOrderDetail($id){
+
+    public function actionOrderDetail($id)
+    {
         $modelOrder = Order::getOrderById($id);
         $modelOrderDetail = OrderItems::getOrderDetailById($id);
         $data = $this->getCommonDate();
         return $this->render('order-detail',
             [
-            'data' => $data,
-            'modelOrder'=> $modelOrder,
-            'modelOrderDetail'=> $modelOrderDetail
+                'data' => $data,
+                'modelOrder' => $modelOrder,
+                'modelOrderDetail' => $modelOrderDetail
             ]
         );
+    }
+
+    public function actionGetGoodsByPriceRange()
+    {
+        $cur = Yii::$app->request->post('valute');
+        $data = Yii::$app->request->post('data');
+        $dataFrom = $data['0'];
+        $dataTo = $data['1'];
+        //vd($dataFrom.'|' . $dataTo);
+        // $modelGoods = Goods::getGoodsByPriceRange($dataFrom ,$dataTo,$cur);
+
+
+        $query = Goods::find()
+            ->where(['>', 'price', $dataFrom])
+            ->AndWhere(['<', 'price', $dataTo])
+            ->AndWhere(['status' => Goods::STATUS_ACTIVE]);
+
+
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'defaultPageSize' => 2]);
+        $modelsGoods = $query->offset($pages->offset)
+            ->limit(3)
+            ->all();
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $iP = Yii::$app->session->id;
+        $quantityInCart = Cart::getQountAllByIp($iP);
+        $data = $this->getCommonDate();
+        $modelBest = Goods::getBest(3);
+
+        return $this->renderAjax('products-ajax', [
+            'modelsGoods' => $modelsGoods,
+            'pages' => $pages,
+            'modelBest' => $modelBest ? $modelBest : false,
+        ]);
+
     }
 }

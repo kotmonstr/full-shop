@@ -2,50 +2,40 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use vova07\imperavi\Widget;
+use dosamigos\tinymce\TinyMce;
 use yii\helpers\Url;
 use frontend\assets\AppAsset;
 
-$this->registerJsFile('/eshop/js/upload-image-blog.js',['depends'=> \frontend\assets\ShopAsset::className()]);
+$this->registerJsFile('/js/custom/tiny.js', ['depends' => AppAsset::className()]);
 ?>
 
 
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+
+<?php $form = ActiveForm::begin(); ?>
 
 <?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
 
-<?= $form->field($model, 'image')->hiddenInput(['maxlength' => 255])->label('') ?>
+<?= $form->field($model, 'image')->textInput(['maxlength' => 255]) ?>
 
-<div class="form-group">
-    <?= Html::button('Выбрать фото', ['class'=>'btn btn-success','onclick'=>'$("#blog-file").click()']) ?>
-</div>
-<div class="form-group image_target">
-    <?php if ($model->image): ?>
-        <img src="/upload/blog/<?= $model->image ?>" height="200" width="200" alt="">
-    <?php endif; ?>
-</div>
+<?php if ($model->image && $model->image != ''): ?>
+    <img src="<?= $model->image ?>" height="200px">
+<?php endif; ?>
 
-
-
-
-<?= $form->field($model,
-    'content')->widget(Widget::className(), [
-    'settings' => [
-        'lang' => 'ru',
-        'minHeight' => 400,
-        'pastePlainText' => true,
-        'buttonSource' => true,
-        'focus' => true,
-        'imageUpload' => Url::to(['/blog/upload']),
-        'imageManagerJson' => Url::to(['/blog/uploaded']),
+<?=
+$form->field($model, 'content')->widget(TinyMce::className(), [
+    'options' => ['rows' => 22],
+    'language' => 'ru',
+    'clientOptions' => [
         'plugins' => [
-            'clips',
-            'fullscreen',
-            'imagemanager',
-
-        ]
+            //"advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking image",
+            "table contextmenu directionality emoticons template textcolor paste fullpage textcolor ",
+        ],
+        'toolbar' => "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor | image media code | styleselect formatselect fontselect fontsizeselect | forecolor backcolor  newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | fullscreen ",
+    //'toolbar3'=> "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
     ]
-]) ?>
+]);
+?>
 
 <div class="form-group">
     <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -57,14 +47,13 @@ $this->registerJsFile('/eshop/js/upload-image-blog.js',['depends'=> \frontend\as
 
 
 
-
 <?php
 $form = ActiveForm::begin([
             'action' => ['/image/submit'],
             'options' => ['enctype' => 'multipart/form-data'],
             'id' => 'form-send-file']);
 ?>
-<?= $form->field($model, 'file')->fileInput(['class' => 'send-file','onchange'=>'QuickUploadImage()']) ?>
+<?= $form->field($model, 'file')->fileInput(['class' => 'send-file']) ?>
 
 <?= Html::Button('Загрузить', ['class' => 'btn btn-success send-file-submit', 'onclick' => 'sendfile()']) ?>
 <?php ActiveForm::end(); ?>

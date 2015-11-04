@@ -117,12 +117,12 @@ class DefaultController extends Controller
         }
         $model = new LoginForm;
         if (Yii::$app->request->isAjax) {
-            vd(2);
+            //vd(2);
             Yii::$app->response->format = Response::FORMAT_JSON;
             $model->load(Yii::$app->request->post());
             return ActiveForm::validate($model);
         }
-        vd(3);
+        //vd(3);
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->login();
             return $this->redirect('/shop/index');

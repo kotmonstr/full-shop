@@ -641,6 +641,25 @@ if ($conn->error) {
     echo "Table blog_comments created". '<br />';
 }else{
     echo "Table blog_comments allredy exist". '<br />';
+}$sql = "CREATE TABLE IF NOT EXISTS `blog_comments` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`parent_id` int(11) DEFAULT NULL,
+`blog_id` int(11) DEFAULT NULL,
+`created_at` int(11) DEFAULT NULL,
+`author_name` text,
+`email` varchar(255) DEFAULT NULL,
+`city` varchar(255) DEFAULT NULL,
+`text` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
+
+
+
+$conn->query($sql);
+if ($conn->error) {
+    echo "Table blog_comments created". '<br />';
+}else{
+    echo "Table blog_comments allredy exist". '<br />';
 }
 $sql = "CREATE TABLE IF NOT EXISTS `order_items` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -870,3 +889,66 @@ if ($conn->error) {
 $conn->close();
 die();
 ?>
+
+
+
+-- phpMyAdmin SQL Dump
+-- version 3.5.2.2
+-- http://www.phpmyadmin.net
+--
+-- Хост: localhost
+-- Время создания: Ноя 04 2015 г., 19:28
+-- Версия сервера: 10.0.20-MariaDB
+-- Версия PHP: 5.2.17
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- База данных: `u713312557_kot`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `comment`
+--
+
+CREATE TABLE IF NOT EXISTS `comment` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`content` text NOT NULL,
+`author_id` int(11) NOT NULL,
+`created_at` int(11) NOT NULL,
+`blog_id` int(11) NOT NULL,
+`updated_at` int(11) NOT NULL,
+PRIMARY KEY (`id`),
+KEY `author_id` (`author_id`,`blog_id`),
+KEY `blog_id` (`blog_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+
+--
+-- Дамп данных таблицы `comment`
+--
+
+INSERT INTO `comment` (`id`, `content`, `author_id`, `created_at`, `blog_id`, `updated_at`) VALUES
+(1, 'хорощий пост', 1, 12121212, 1, 0),
+(2, '2ecf', 2, 223452345, 18, 0),
+(3, 'test', 3, 1426806202, 19, 1426806202),
+(4, 'jr', 1, 1426806279, 19, 1426806279),
+(5, 'привет чувак Н', 1, 1426932227, 19, 1426932227),
+(6, 'cccc', 1, 1427658169, 19, 1427658169),
+(7, 'здорова', 1, 1427663013, 19, 1427663013),
+(8, 'ftghyuicgtyui', 1, 1427704750, 19, 1427704750),
+(16, 'класный сайт зделал лайк поставлю', 1, 1427734954, 20, 1427734954),
+(14, 'Отличные пестали', 1, 1427734864, 20, 1427734864),
+(17, ':Жесть', 1, 1429386113, 24, 1429386113);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

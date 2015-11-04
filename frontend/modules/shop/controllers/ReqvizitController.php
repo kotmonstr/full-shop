@@ -25,7 +25,7 @@ class ReqvizitController extends Controller
             ],
         ];
     }
-    public $layout='/adminka-admin';
+    public $layout='/adminka';
 
     /**
      * Lists all Reqvizit models.

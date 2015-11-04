@@ -189,8 +189,8 @@ $file_avatar = Yii::getAlias('@frontend') . '/web/upload/user/' . Yii::$app->use
         <li class="<?php if ($path == 'cash/index') {
             echo "active";
         } ?>">
-            <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal"
-               onclick="$('.modal').css('opacity', '1').show(),$('.layout').show()">
+            <a href="javascript:void(0);" data-toggle="cash" data-target="#myModalcash"
+               onclick="$('.cash').css('opacity', '1').show(),$('.layout').show()">
                 <i class="fa"></i><span class="link-title">&nbsp;Очистить кеш</span>
             </a>
         </li>
@@ -199,17 +199,17 @@ $file_avatar = Yii::getAlias('@frontend') . '/web/upload/user/' . Yii::$app->use
 </div><!-- /#left -->
 
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade cash" id="myModalcash" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                         onclick="$('.modal').hide();$('.layout').hide()"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Очистка кеш</h4>
+                <h4 class="modal-title" >Очистка кеш</h4>
             </div>
             <div class="modal-body" style="text-align: center">
-                <p> Вы действительно хотите очистить кеш?</p>
+                <p style="color: #000000!important;"> Вы действительно хотите очистить кеш?</p>
             </div>
             <div class="modal-footer">
 
@@ -224,7 +224,7 @@ $file_avatar = Yii::getAlias('@frontend') . '/web/upload/user/' . Yii::$app->use
     </div>
 </div>
 
-<div class="modal fade" id="system" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade system" id="system" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
